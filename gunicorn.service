@@ -1,0 +1,16 @@
+[Unit]
+Description=gunicorn daemon
+After=network.target
+[Service]
+#aquí se define el nombre del usuario
+User=ubuntu
+Group=www-data
+#aquí se define en donde está ubicado el proyecto
+WorkingDirectory=/home/ubuntu/mysitex
+#aquí se define en donde está ubicada la carpeta del ambiente de python
+#y que está instalado gunicorn y donde estará ubicado el archivo 
+#que usará nginx para hacer la publicación
+ExecStart=/home/ubuntu/mysitex/env/bin/gunicorn --workers 3 --bind unix:/home/ubuntu/mysitex/mysitex.sock mysitex.wsgi:application
+
+[Install]
+WantedBy=multi-user.target
