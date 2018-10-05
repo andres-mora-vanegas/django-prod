@@ -1,36 +1,36 @@
 # Instalación de proyecto django usando proxy reverso de nginx
 
-## instalación de  virtualenv
+## Instalación de  virtualenv
 
 ```sh
 pip install --upgrade virtualenv
 ```
 
-## creación del entorno
+## Creación del entorno
 
 ```sh
 virtualenv env
 ```
 
-## activación de entorno
+## Activación de entorno
 
 ```sh
 source env/bin/activate
 ```
 
-## cración del proyecto django
+## Creación del proyecto django
 
 ```sh
 django-admin startproject mysitex
 ```
 
-## instalación de gunicorn en django
+## Instalación de gunicorn en django
 
 ```sh
 pip install gunicorn
 ```
 
-## probamos que el gunicorn funcione como servidor de la aplicación
+## Probamos que el gunicorn funcione como servidor de la aplicación
 
 ```sh
 gunicorn mysitex.wsgi
@@ -38,13 +38,13 @@ gunicorn mysitex.wsgi
 
 - debería habilitarse el proyecto para ser accedido vía localhost:8000
 
-## creación de archivo gunicorn.service
+## Creación de archivo gunicorn.service
 
 ```sh
 sudo nano /etc/systemd/system/gunicorn.service
 ```
 
-### contenido del archivo
+### Contenido del archivo
 
 ```sh
 [Unit]
@@ -65,25 +65,25 @@ ExecStart=/home/ubuntu/mysitex/env/bin/gunicorn --workers 3 --bind unix:/home/ub
 WantedBy=multi-user.target
 ```
 
-### se inicia el servicio
+### Se inicia el servicio
 
 ```sh
 sudo systemctl start gunicorn
 ```
 
-### se habilita el servicio
+### Se habilita el servicio
 
 ```sh
 sudo systemctl enable gunicorn
 ```
 
-### se revisa que est en estado running la aplicación
+### Se revisa que el estado sea running
 
 ```sh
 sudo systemctl status gunicorn
 ```
 
-### el resultado es debe ser:
+### El resultado es debe ser:
 
 ```sh
  gunicorn.service - gunicorn daemon
@@ -110,7 +110,7 @@ sudo apt-get install nginx
 nano /etc/nginx/sites-available/default
 ```
 
-### contenido del archivo default
+### Contenido del archivo default
 
 ```sh
 server {
@@ -142,13 +142,13 @@ server {
 }
 ```
 
-### se reinicia nginx
+### Se reinicia nginx
 
 ```sh
 sudo systemctl restart nginx
 ```
 
-### se valida el estado del servicio de nginx
+### Se valida el estado del servicio de nginx
 
 ```sh
 sudo systemctl status nginx
@@ -173,4 +173,4 @@ nginx.service - A high performance web server and a reverse proxy server
 
 ```
 
-## acceder vía localhost, debería responder django a la petición.
+## Acceder vía localhost, debería responder django a la petición.
